@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>حاسبة المعدل التفصيلية</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      direction: rtl;
+      text-align: center;
+      padding: 30px;
+      background-color: #f0f8ff;
+    }
+    .subject {
+      margin-bottom: 15px;
+    }
+    input {
+      width: 60px;
+      text-align: center;
+      margin: 2px;
+    }
+    button {
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+    #result {
+      font-size: 22px;
+      font-weight: bold;
+      margin-top: 15px;
+    }
+    #classification {
+      font-size: 20px;
+      margin-top: 5px;
+      font-weight: bold;
+    }
+    #madeby {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inline-block;
+      animation: scroll 8s linear infinite;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(100%); }
+      100% { transform: translateX(-100%); }
+    }
+  </style>
+</head>
+<body>
+  <h1>حاسبة المعدل التفصيلية</h1>
+  <p>أدخل درجات كل مادة (TP 20% + MC 20% + Exam 60%)</p>
+
+  <div class="subject">
+    <label>Bactériologie (3): </label>
+    <input type="number" placeholder="TP" id="Bactériologie_TP">
+    <input type="number" placeholder="MC" id="Bactériologie_MC">
+    <input type="number" placeholder="Exam" id="Bactériologie_Exam">
+  </div>
+
+  <div class="subject">
+    <label>Parasitologie (3): </label>
+    <input type="number" placeholder="TP" id="Parasitologie_TP">
+    <input type="number" placeholder="MC" id="Parasitologie_MC">
+    <input type="number" placeholder="Exam" id="Parasitologie_Exam">
+  </div>
+
+  <div class="subject">
+    <label>Pharmacologie (3): </label>
+    <input type="number" placeholder="TP" id="Pharmacologie_TP">
+    <input type="number" placeholder="MC" id="Pharmacologie_MC">
+    <input type="number" placeholder="Exam" id="Pharmacologie_Exam">
+  </div>
+
+  <div class="subject">
+    <label>Sémiologie (3): </label>
+    <input type="number" placeholder="TP" id="Sémiologie_TP">
+    <input type="number" placeholder="MC" id="Sémiologie_MC">
+    <input type="number" placeholder="Exam" id="Sémiologie_Exam">
+  </div>
+
+  <div class="subject">
+    <label>FNAC (2): </label>
+    <input type="number" placeholder="TP" id="FNAC_TP">
+    <input type="number" placeholder="MC" id="FNAC_MC">
+    <input type="number" placeholder="Exam" id="FNAC_Exam">
+  </div>
+
+  <div class="subject">
+    <label>Physiologie pathologique (3): </label>
+    <input type="number" placeholder="TP" id="Physiologie_TP">
+    <input type="number" placeholder="MC" id="Physiologie_MC">
+    <input type="number" placeholder="Exam" id="Physiologie_Exam">
+  </div>
+
+  <div class="subject">
+    <label>Aviculture (3): </label>
+    <input type="number" placeholder="TP" id="Aviculture_TP">
+    <input type="number" placeholder="MC" id="Aviculture_MC">
+    <input type="number" placeholder="Exam" id="Aviculture_Exam">
+  </div>
+
+  <button onclick="calculateFinalAverage()">احسب المعدل النهائي</button>
+
+  <p id="result"></p>
+  <p id="classification"></p>
+
+  <div id="madeby">Made by Hakim Houhou</div>
+
+  <script>
+    const subjects = {
+      "Bactériologie": 3,
+      "Parasitologie": 3,
+      "Pharmacologie": 3,
+      "Sémiologie": 3,
+      "FNAC": 2,
+      "Physiologie": 3,
+      "Aviculture": 3
+    };
+
+    function calculateFinalAverage() {
+      let totalWeighted = 0;
+      let totalWeights = 0;
+
+      for (let subject in subjects) {
+        const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
+        const MC = parseFloat(document.getElementById(subject + "_MC").value) || 0;
+        const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
+
+        const finalGrade = TP * 0.2 + MC * 0.2 + Exam * 0.6;
+
+        totalWeighted += finalGrade * subjects[subject];
+        totalWeights += subjects[subject];
+      }
+
+      const average = totalWeighted / totalWeights;
+      document.getElementById("result").textContent = "المعدل النهائي المرجح هو: " + average.toFixed(2);
+
+      // تحديد التصنيف
+      let classification = "";
+      let color = "";
+
+      if (average >= 16) { classification = "ممتاز"; color="#4CAF50"; }
+      else if (average >= 14) { classification = "جيد جدًا"; color="#2E8B57"; }
+      else if (average >= 12) { classification = "جيد"; color="#FFD700"; }
+      else if (average >= 10) { classification = "متوسط"; color="#FFA500"; }
+      else { classification = "ضعيف"; color="#FF4500"; }
+
+      const classificationElem = document.getElementById("classification");
+      classificationElem.textContent = "التصنيف: " + classification;
+      classificationElem.style.color = color;
+    }
+  </script>
+</body>
+</html>
