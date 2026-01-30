@@ -3,109 +3,164 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حاسبة المعدل التفصيلية</title>
+  <title>حاسبة المعدل الحديثة</title>
   <style>
+    /* عام */
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       direction: rtl;
       text-align: center;
+      background: #f5fdf8;
+      margin: 0;
       padding: 30px;
-      background-color: #f0f8ff;
+      color: #333;
     }
+
+    h1 {
+      color: #2e8b57;
+      margin-bottom: 20px;
+    }
+
+    /* بطاقة كل مادة */
     .subject {
-      margin-bottom: 15px;
+      background: #ffffff;
+      border-radius: 12px;
+      padding: 15px;
+      margin: 15px auto;
+      width: 90%;
+      max-width: 500px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
     }
-    input {
-      width: 60px;
-      text-align: center;
-      margin: 2px;
-    }
-    button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      cursor: pointer;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-    #result {
-      font-size: 22px;
+
+    .subject label {
+      width: 100%;
+      text-align: right;
       font-weight: bold;
-      margin-top: 15px;
+      margin-bottom: 5px;
+      color: #2e8b57;
     }
+
+    input {
+      width: 70px;
+      padding: 8px;
+      margin: 5px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+      font-size: 14px;
+      transition: all 0.2s ease-in-out;
+    }
+
+    input:focus {
+      border-color: #2e8b57;
+      box-shadow: 0 0 5px rgba(46,139,87,0.5);
+      outline: none;
+    }
+
+    /* الزر */
+    button {
+      background: #2e8b57;
+      color: white;
+      padding: 12px 25px;
+      margin-top: 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #246b45;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    }
+
+    /* النتيجة */
+    #result {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
     #classification {
       font-size: 20px;
       margin-top: 5px;
       font-weight: bold;
     }
+
+    /* الرسالة المتحركة */
     #madeby {
       margin-top: 30px;
       font-size: 18px;
       font-weight: bold;
-      color: #333;
+      color: #2e8b57;
       white-space: nowrap;
       overflow: hidden;
       display: inline-block;
-      animation: scroll 8s linear infinite;
+      animation: scroll 10s linear infinite;
     }
 
     @keyframes scroll {
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
+
   </style>
 </head>
 <body>
-  <h1>حاسبة المعدل التفصيلية</h1>
+  <h1>حاسبة المعدل الحديثة</h1>
   <p>أدخل درجات كل مادة:</p>
 
-  <!-- المواد العادية (TP 20%, MC 20%, Exam 60%) -->
+  <!-- المواد العادية -->
   <div class="subject">
-    <label>Bactériologie (3): </label>
+    <label>Bactériologie (3)</label>
     <input type="number" placeholder="TP" id="Bactériologie_TP">
     <input type="number" placeholder="MC" id="Bactériologie_MC">
     <input type="number" placeholder="Exam" id="Bactériologie_Exam">
   </div>
 
   <div class="subject">
-    <label>Parasitologie (3): </label>
+    <label>Parasitologie (3)</label>
     <input type="number" placeholder="TP" id="Parasitologie_TP">
     <input type="number" placeholder="MC" id="Parasitologie_MC">
     <input type="number" placeholder="Exam" id="Parasitologie_Exam">
   </div>
 
   <div class="subject">
-    <label>Pharmacologie (3): </label>
+    <label>Pharmacologie (3)</label>
     <input type="number" placeholder="TP" id="Pharmacologie_TP">
     <input type="number" placeholder="MC" id="Pharmacologie_MC">
     <input type="number" placeholder="Exam" id="Pharmacologie_Exam">
   </div>
 
   <div class="subject">
-    <label>Sémiologie (3): </label>
+    <label>Sémiologie (3)</label>
     <input type="number" placeholder="TP" id="Sémiologie_TP">
     <input type="number" placeholder="MC" id="Sémiologie_MC">
     <input type="number" placeholder="Exam" id="Sémiologie_Exam">
   </div>
 
   <div class="subject">
-    <label>FNAC (2): </label>
+    <label>FNAC (2)</label>
     <input type="number" placeholder="TP" id="FNAC_TP">
     <input type="number" placeholder="MC" id="FNAC_MC">
     <input type="number" placeholder="Exam" id="FNAC_Exam">
   </div>
 
-  <!-- Physiologie pathologique (TP 30%, Exam 70%) -->
+  <!-- Physiologie pathologique -->
   <div class="subject">
-    <label>Physiologie pathologique (3): </label>
+    <label>Physiologie pathologique (3)</label>
     <input type="number" placeholder="TP" id="Physiologie_TP">
     <input type="number" placeholder="Exam" id="Physiologie_Exam">
   </div>
 
   <div class="subject">
-    <label>Aviculture (3): </label>
+    <label>Aviculture (3)</label>
     <input type="number" placeholder="TP" id="Aviculture_TP">
     <input type="number" placeholder="MC" id="Aviculture_MC">
     <input type="number" placeholder="Exam" id="Aviculture_Exam">
@@ -137,7 +192,7 @@
         let finalGrade = 0;
 
         if(subject === "Physiologie") {
-          // Physiologie pathologique: TP 30% + Exam 70%
+          // Physiologie: TP 30% + Exam 70%
           const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
           const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
           finalGrade = TP * 0.3 + Exam * 0.7;
@@ -156,12 +211,12 @@
       const average = totalWeighted / totalWeights;
       document.getElementById("result").textContent = "المعدل النهائي المرجح هو: " + average.toFixed(2);
 
-      // تحديد التصنيف
+      // التصنيف
       let classification = "";
       let color = "";
 
-      if (average >= 16) { classification = "ممتاز"; color="#4CAF50"; }
-      else if (average >= 14) { classification = "جيد جدًا"; color="#2E8B57"; }
+      if (average >= 16) { classification = "ممتاز"; color="#2e8b57"; }
+      else if (average >= 14) { classification = "جيد جدًا"; color="#4CAF50"; }
       else if (average >= 12) { classification = "جيد"; color="#FFD700"; }
       else if (average >= 10) { classification = "متوسط"; color="#FFA500"; }
       else { classification = "ضعيف"; color="#FF4500"; }
@@ -173,3 +228,4 @@
   </script>
 </body>
 </html>
+
