@@ -59,8 +59,9 @@
 </head>
 <body>
   <h1>حاسبة المعدل التفصيلية</h1>
-  <p>أدخل درجات كل مادة (TP 20% + MC 20% + Exam 60%)</p>
+  <p>أدخل درجات كل مادة:</p>
 
+  <!-- المواد العادية (TP 20%, MC 20%, Exam 60%) -->
   <div class="subject">
     <label>Bactériologie (3): </label>
     <input type="number" placeholder="TP" id="Bactériologie_TP">
@@ -96,10 +97,10 @@
     <input type="number" placeholder="Exam" id="FNAC_Exam">
   </div>
 
+  <!-- Physiologie pathologique (TP 30%, Exam 70%) -->
   <div class="subject">
     <label>Physiologie pathologique (3): </label>
     <input type="number" placeholder="TP" id="Physiologie_TP">
-    <input type="number" placeholder="MC" id="Physiologie_MC">
     <input type="number" placeholder="Exam" id="Physiologie_Exam">
   </div>
 
@@ -133,11 +134,20 @@
       let totalWeights = 0;
 
       for (let subject in subjects) {
-        const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
-        const MC = parseFloat(document.getElementById(subject + "_MC").value) || 0;
-        const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
+        let finalGrade = 0;
 
-        const finalGrade = TP * 0.2 + MC * 0.2 + Exam * 0.6;
+        if(subject === "Physiologie") {
+          // Physiologie pathologique: TP 30% + Exam 70%
+          const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
+          const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
+          finalGrade = TP * 0.3 + Exam * 0.7;
+        } else {
+          // باقي المواد: TP 20% + MC 20% + Exam 60%
+          const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
+          const MC = parseFloat(document.getElementById(subject + "_MC").value) || 0;
+          const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
+          finalGrade = TP * 0.2 + MC * 0.2 + Exam * 0.6;
+        }
 
         totalWeighted += finalGrade * subjects[subject];
         totalWeights += subjects[subject];
@@ -163,4 +173,3 @@
   </script>
 </body>
 </html>
-
