@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>حاسبة المعدل الحديثة</title>
+  <title>Calculateur de moyenne vétérinaire</title>
   <style>
-    /* عام */
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       direction: rtl;
@@ -21,7 +20,6 @@
       margin-bottom: 20px;
     }
 
-    /* بطاقة كل مادة */
     .subject {
       background: #ffffff;
       border-radius: 12px;
@@ -61,7 +59,6 @@
       outline: none;
     }
 
-    /* الزر */
     button {
       background: #2e8b57;
       color: white;
@@ -80,20 +77,20 @@
       box-shadow: 0 4px 8px rgba(0,0,0,0.2);
     }
 
-    /* النتيجة */
-    #result {
+    #result, #classification {
       font-size: 24px;
       font-weight: bold;
       margin-top: 20px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.7s ease;
     }
 
     #classification {
       font-size: 20px;
       margin-top: 5px;
-      font-weight: bold;
     }
 
-    /* الرسالة المتحركة */
     #madeby {
       margin-top: 30px;
       font-size: 18px;
@@ -109,64 +106,62 @@
       0% { transform: translateX(100%); }
       100% { transform: translateX(-100%); }
     }
-
   </style>
 </head>
 <body>
-  <h1>حاسبة المعدل الحديثة</h1>
-  <p>أدخل درجات كل مادة:</p>
 
-  <!-- المواد العادية -->
+  <h1>Calculateur de moyenne vétérinaire</h1>
+  <p>Entrez les notes de chaque matière :</p>
+
   <div class="subject">
     <label>Bactériologie (3)</label>
     <input type="number" placeholder="TP" id="Bactériologie_TP">
-    <input type="number" placeholder="MC" id="Bactériologie_MC">
-    <input type="number" placeholder="Exam" id="Bactériologie_Exam">
+    <input type="number" placeholder="CC" id="Bactériologie_CC">
+    <input type="number" placeholder="EMD" id="Bactériologie_EMD">
   </div>
 
   <div class="subject">
     <label>Parasitologie (3)</label>
     <input type="number" placeholder="TP" id="Parasitologie_TP">
-    <input type="number" placeholder="MC" id="Parasitologie_MC">
-    <input type="number" placeholder="Exam" id="Parasitologie_Exam">
+    <input type="number" placeholder="CC" id="Parasitologie_CC">
+    <input type="number" placeholder="EMD" id="Parasitologie_EMD">
   </div>
 
   <div class="subject">
     <label>Pharmacologie (3)</label>
     <input type="number" placeholder="TP" id="Pharmacologie_TP">
-    <input type="number" placeholder="MC" id="Pharmacologie_MC">
-    <input type="number" placeholder="Exam" id="Pharmacologie_Exam">
+    <input type="number" placeholder="CC" id="Pharmacologie_CC">
+    <input type="number" placeholder="EMD" id="Pharmacologie_EMD">
   </div>
 
   <div class="subject">
     <label>Sémiologie (3)</label>
     <input type="number" placeholder="TP" id="Sémiologie_TP">
-    <input type="number" placeholder="MC" id="Sémiologie_MC">
-    <input type="number" placeholder="Exam" id="Sémiologie_Exam">
+    <input type="number" placeholder="CC" id="Sémiologie_CC">
+    <input type="number" placeholder="EMD" id="Sémiologie_EMD">
   </div>
 
   <div class="subject">
     <label>FNAC (2)</label>
     <input type="number" placeholder="TP" id="FNAC_TP">
-    <input type="number" placeholder="MC" id="FNAC_MC">
-    <input type="number" placeholder="Exam" id="FNAC_Exam">
+    <input type="number" placeholder="CC" id="FNAC_CC">
+    <input type="number" placeholder="EMD" id="FNAC_EMD">
   </div>
 
-  <!-- Physiologie pathologique -->
   <div class="subject">
-    <label>Physiologie pathologique (3)</label>
-    <input type="number" placeholder="TP" id="Physiologie_TP">
-    <input type="number" placeholder="Exam" id="Physiologie_Exam">
+    <label>Physiopathologie (3)</label>
+    <input type="number" placeholder="TP" id="Physiopathologie_TP">
+    <input type="number" placeholder="EMD" id="Physiopathologie_EMD">
   </div>
 
   <div class="subject">
     <label>Aviculture (3)</label>
     <input type="number" placeholder="TP" id="Aviculture_TP">
-    <input type="number" placeholder="MC" id="Aviculture_MC">
-    <input type="number" placeholder="Exam" id="Aviculture_Exam">
+    <input type="number" placeholder="CC" id="Aviculture_CC">
+    <input type="number" placeholder="EMD" id="Aviculture_EMD">
   </div>
 
-  <button onclick="calculateFinalAverage()">احسب المعدل النهائي</button>
+  <button onclick="calculateFinalAverage()">Calculer la moyenne</button>
 
   <p id="result"></p>
   <p id="classification"></p>
@@ -180,7 +175,7 @@
       "Pharmacologie": 3,
       "Sémiologie": 3,
       "FNAC": 2,
-      "Physiologie": 3,
+      "Physiopathologie": 3,
       "Aviculture": 3
     };
 
@@ -191,17 +186,15 @@
       for (let subject in subjects) {
         let finalGrade = 0;
 
-        if(subject === "Physiologie") {
-          // Physiologie: TP 30% + Exam 70%
+        if(subject === "Physiopathologie") {
           const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
-          const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
-          finalGrade = TP * 0.3 + Exam * 0.7;
+          const EMD = parseFloat(document.getElementById(subject + "_EMD").value) || 0;
+          finalGrade = TP * 0.3 + EMD * 0.7;
         } else {
-          // باقي المواد: TP 20% + MC 20% + Exam 60%
           const TP = parseFloat(document.getElementById(subject + "_TP").value) || 0;
-          const MC = parseFloat(document.getElementById(subject + "_MC").value) || 0;
-          const Exam = parseFloat(document.getElementById(subject + "_Exam").value) || 0;
-          finalGrade = TP * 0.2 + MC * 0.2 + Exam * 0.6;
+          const CC = parseFloat(document.getElementById(subject + "_CC").value) || 0;
+          const EMD = parseFloat(document.getElementById(subject + "_EMD").value) || 0;
+          finalGrade = TP * 0.2 + CC * 0.2 + EMD * 0.6;
         }
 
         totalWeighted += finalGrade * subjects[subject];
@@ -209,23 +202,53 @@
       }
 
       const average = totalWeighted / totalWeights;
-      document.getElementById("result").textContent = "المعدل النهائي المرجح هو: " + average.toFixed(2);
+      const resultElem = document.getElementById("result");
+      const classificationElem = document.getElementById("classification");
 
-      // التصنيف
+      resultElem.textContent = "Moyenne finale: " + average.toFixed(2);
+      resultElem.style.opacity = 0;
+      classificationElem.style.opacity = 0;
+
       let classification = "";
       let color = "";
 
-      if (average >= 16) { classification = "ممتاز"; color="#2e8b57"; }
-      else if (average >= 14) { classification = "جيد جدًا"; color="#4CAF50"; }
-      else if (average >= 12) { classification = "جيد"; color="#FFD700"; }
-      else if (average >= 10) { classification = "متوسط"; color="#FFA500"; }
-      else { classification = "ضعيف"; color="#FF4500"; }
+      if (average < 8) { 
+          classification = "Très faible"; 
+          color = "#8B0000";
+      }
+      else if (average < 10) { 
+          classification = "Faible"; 
+          color = "#FF4500";
+      }
+      else if (average < 11.5) { 
+          classification = "Moyenne"; 
+          color = "#FFA500";
+      }
+      else if (average < 13.5) { 
+          classification = "Au-dessus de la moyenne"; 
+          color = "#9ACD32";
+      }
+      else if (average < 16) { 
+          classification = "Bien"; 
+          color = "#2e8b57";
+      }
+      else { 
+          classification = "Excellent"; 
+          color = "#006400";
+      }
 
-      const classificationElem = document.getElementById("classification");
-      classificationElem.textContent = "التصنيف: " + classification;
+      classificationElem.textContent = "Classement: " + classification;
       classificationElem.style.color = color;
+
+      setTimeout(() => {
+        resultElem.style.opacity = 1;
+        resultElem.style.transform = "translateY(0)";
+        classificationElem.style.opacity = 1;
+        classificationElem.style.transform = "translateY(0)";
+      }, 100);
     }
   </script>
 </body>
 </html>
+
 
